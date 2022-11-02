@@ -1,19 +1,21 @@
 import React, { useEffect, useState } from 'react';
 
-const OrdersRow = ({order}) => {
-  const{img,serviceName,phone, price,service,customer}=order;
+const OrdersRow = ({order,handleDelete,handleStatusUpdate}) => {
+  const{_id,serviceName,phone, price,service,customer ,status}=order;
   const [orderService,setOrderService] = useState({});
   useEffect(()=>{
     fetch(`http://localhost:5000/services/${service}`)
     .then(res=>res.json())
     .then(data=>setOrderService(data))
   },[service])
+
+
   
   return (
     <tr>
         <th>
           <label>
-            <button className='btn btn-circle btn-outline'>X</button>
+            <button onClick={()=>handleDelete(_id)} className='btn btn-circle btn-outline'>X</button>
           </label>
         </th>
         <td>
@@ -38,7 +40,7 @@ const OrdersRow = ({order}) => {
         </td>
         <td>Indigo</td>
         <th>
-          <button className="btn btn-ghost btn-xs">details</button>
+          <button onClick={()=>handleStatusUpdate(_id)} className="btn btn-ghost btn-xs">{status ? status : 'pending'}</button>
         </th>
       </tr>
   );
