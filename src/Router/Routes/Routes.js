@@ -10,31 +10,42 @@ const { createBrowserRouter } = require("react-router-dom");
 
 const router = createBrowserRouter([
   {
-    path:'/',
-    element:<Main></Main>,children:[
+    path: "/",
+    element: <Main></Main>,
+    children: [
       {
-        path:'/',
-        element:<Home></Home>
+        path: "/",
+        element: <Home></Home>,
       },
       {
-        path:'/login',
-        element:<Login></Login>
+        path: "/login",
+        element: <Login></Login>,
       },
       {
-        path:'/signup',
-        element:<SignUp></SignUp>
+        path: "/signup",
+        element: <SignUp></SignUp>,
       },
       {
-        path:'/checkout/:id',
-        element:<PrivateRoutes><CheckOut></CheckOut></PrivateRoutes>,
-        loader:({params})=>fetch(`http://localhost:5000/services/${params.id}`)
+        path: "/checkout/:id",
+        element: (
+          <PrivateRoutes>
+            <CheckOut></CheckOut>
+          </PrivateRoutes>
+        ),
+        loader: ({ params }) =>
+          fetch(
+            `https://genius-car-server-ruddy.vercel.app/services/${params.id}`
+          ),
       },
       {
-        path:'/orders',
-        element:<PrivateRoutes><Orders></Orders></PrivateRoutes>
-      }
-     
-    ]
-  }
-])
+        path: "/orders",
+        element: (
+          <PrivateRoutes>
+            <Orders></Orders>
+          </PrivateRoutes>
+        ),
+      },
+    ],
+  },
+]);
 export default router;
