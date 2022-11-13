@@ -1,4 +1,5 @@
 import Main from "../../Layout/Main";
+import Blog from "../../Pages/Blog/Blog";
 import CheckOut from "../../Pages/CheckOut/CheckOut";
 import Home from "../../Pages/Home/Home/Home";
 import Login from "../../Pages/Login/Login";
@@ -9,6 +10,11 @@ import PrivateRoutes from "../PrivateRoutes/PrivateRoutes";
 const { createBrowserRouter } = require("react-router-dom");
 
 const router = createBrowserRouter([
+  {
+    path:'/blog',
+    element:<Blog></Blog>
+
+  },
   {
     path: "/",
     element: <Main></Main>,
